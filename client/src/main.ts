@@ -16,7 +16,7 @@ async function begin() {
 }
 
 async function main() {
-	let state = new State();
+	const state = new State();
 
 	while (true) {
 		switch (state.get()) {

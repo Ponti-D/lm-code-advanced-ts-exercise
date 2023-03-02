@@ -1,8 +1,8 @@
 import { fetchPost } from "../../../api/fetch_post";
-import { clear, print, prompt, printNewLine } from "../../../ui/console.js";
+import { clear, print, prompt, printNewLine } from "../../../ui/console";
 
 export async function browsePosts() {
-	clear("nope");
+	clear();
 
 	const desiredPostId = await prompt("Enter Post ID");
 
@@ -10,7 +10,7 @@ export async function browsePosts() {
 
 	print(`📨 Fetching post "${desiredPostId}...`);
 
-	const result = await fetchPost(desiredPostId);
+	const result = await fetchPost(desiredPostId );
 
 	print(`🥳 Received post:`);
 
