@@ -1,5 +1,7 @@
+import { sendUserToServer } from "./api/send_adduser_to_server";
 import { exit } from "./exit/exit";
 import { showMenu } from "./menu/menu";
+import { addNewUser } from "./menu/options/add_user/add_user";
 import { browsePosts } from "./menu/options/browse_posts/browse_posts";
 import { sendMessage } from "./menu/options/send_message/send_message";
 import { showAllPosts } from "./menu/options/show_all_posts/show_all_posts";
@@ -14,6 +16,7 @@ async function begin() {
 	await prompt("⌨️ Press [ENTER] to continue! 🕶️");
 	main();
 }
+
 
 async function main() {
 	const state = new State();
@@ -45,8 +48,7 @@ async function main() {
 				break;
 			case "ADD_USER":
 				clear();
-				print("🏗️  This functionality has not been implemented!");
-				await prompt("⌨️ Press [ENTER] to return to the main menu! 🕶️");
+				const addUser = await addNewUser();
 				state.set(states.MENU);
 				break;
 			case "UNKNOWN":
