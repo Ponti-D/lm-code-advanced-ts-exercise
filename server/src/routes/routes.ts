@@ -1,7 +1,7 @@
 import * as express from "express";
 import { Express } from "express";
 import { getAllPosts } from "../services/posts_service";
-import { getAllUsers } from "../services/users_service";
+import { addNewUser, getAllUsers } from "../services/users_service";
 
 /*
 
@@ -12,7 +12,7 @@ import { getAllUsers } from "../services/users_service";
 	... but for this little project we'll bypass that and keep the logic all in this one file.
 
 */
-
+ 
 export function initialiseRoutes(app: Express) {
 	console.log("🏗️  Setting up routers...");
 
@@ -77,21 +77,23 @@ function addAPIRoutes(app: Express) {
 		else res.status(200).send(JSON.stringify({ postFound: false }));
 	});
 
-	console.log("✍️  Adding user routes...");
+	console.log("✍️  Adding get all user routes...");
 	apiRouter.get("/users/all", (req, res) => {
 		res.status(200).send(JSON.stringify(getAllUsers()));
 	});
 
-	console.log("✍️ Add a add new user route...............");
+	console.log("✍️  Adding add new user route...............");
 	apiRouter.post("/users/add", (req, res) => {
 		const { body } = req;
        
-		// we don't do anything with the user, but let's echo it back in the console
-		console.log(`👋 Received a new user with name "${body.username}"`);
-        
+		const success = addNewUser(body.username);
+
+		if(success){
+			res.status(200).send({ success: true });
+		}else{
+			res.status(200).send({ success: false });
+		}
 		
-		// reply with a success boolean
-		res.status(200).send({ success: true });
 	});
 
 	apiRouter.get("/users/:id", (req, res) => {

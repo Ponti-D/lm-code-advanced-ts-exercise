@@ -17,7 +17,6 @@ async function begin() {
 	main();
 }
 
-
 async function main() {
 	const state = new State();
 
