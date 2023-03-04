@@ -1,6 +1,7 @@
 import { sendUserToServer } from "./api/send_adduser_to_server";
 import { exit } from "./exit/exit";
 import { showMenu } from "./menu/menu";
+import { addNewPost } from "./menu/options/add_post/add_post";
 import { addNewUser } from "./menu/options/add_user/add_user";
 import { browsePosts } from "./menu/options/browse_posts/browse_posts";
 import { sendMessage } from "./menu/options/send_message/send_message";
@@ -45,9 +46,14 @@ async function main() {
 				const post = await browsePosts();
 				state.set(states.MENU);
 				break;
+			case "ADD_POST":
+				clear();
+				const newpost = await addNewPost();
+				state.set(states.MENU);
+				break;
 			case "ADD_USER":
 				clear();
-				const addUser = await addNewUser();
+				const user = await addNewUser();
 				state.set(states.MENU);
 				break;
 			case "UNKNOWN":
